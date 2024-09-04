@@ -1,4 +1,4 @@
-/* o(n^2), extraído de wikibooks.org */
+// o(n^2), extraído de wikibooks.org
 #include <algorithm> // for: std::iter_swap, std::min_element
 
 template <typename Iterator>
