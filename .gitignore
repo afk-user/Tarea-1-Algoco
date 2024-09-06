@@ -1,0 +1,6 @@
+# ignore outputs
+sortmain
+matrixmain
+
+# ignore vscode folder
+.vscode
