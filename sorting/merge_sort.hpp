@@ -1,22 +1,19 @@
-// O(nlogn), extraído de rosettacode.org
+// O(nlogn), extraido de wikibooks.org
 #include <iterator>
 #include <algorithm> // for std::inplace_merge
 #include <functional> // for std::less
 
-template<typename RandomAccessIterator, typename Order>
- void mergesort(RandomAccessIterator first, RandomAccessIterator last, Order order)
+template <typename BidirectionalIterator, typename Compare = std::less<>>
+void merge_sort(BidirectionalIterator first, BidirectionalIterator last, Compare cmp = Compare {})
 {
-  if (last - first > 1)
-  {
-    RandomAccessIterator middle = first + (last - first) / 2;
-    mergesort(first, middle, order);
-    mergesort(middle, last, order);
-    std::inplace_merge(first, middle, last, order);
-  }
-}
-
-template<typename RandomAccessIterator>
- void mergesort(RandomAccessIterator first, RandomAccessIterator last)
-{
-  mergesort(first, last, std::less<typename std::iterator_traits<RandomAccessIterator>::value_type>());
+    const auto n = std::distance(first, last);
+    
+    if (n > 1) {
+        const auto middle = std::next(first, n / 2);
+        
+        merge_sort(first, middle, cmp);
+        merge_sort(middle, last, cmp);
+        
+        std::inplace_merge(first, middle, last, cmp);
+    }
 }

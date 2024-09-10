@@ -1,6 +1,8 @@
-# ignore outputs
+# files to ignore:
 sortmain
 matrixmain
+sortedData.txt
+resultingMatrix*.txt
 
-# ignore vscode folder
+# folders to ignore:
 .vscode

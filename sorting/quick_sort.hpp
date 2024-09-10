@@ -1,36 +1,54 @@
-// extraído de wikibooks.org
-#include <functional>
-#include <algorithm>
-#include <iterator>
+    // O(nlogn), extraido de geeksforgeeks.org
+#include <bits/stdc++.h>
+using namespace std;
 
-template< typename BidirectionalIterator, typename Compare >
-void quick_sort( BidirectionalIterator first, BidirectionalIterator last, Compare cmp ) {
-    if( first != last ) {
-        BidirectionalIterator left  = first;
-        BidirectionalIterator right = last;
-        BidirectionalIterator pivot = left++;
+// Function to partition the array and return the pivot index
+int partition(vector<int>& arr, int low, int high) {
+  
+    // Choose the pivot
+    int pos;
+    int mid = (low+high)/2;
+    if ((arr[low]>arr[mid])^(arr[low]>arr[high]))
+        pos = low;
+    else if ((arr[mid]<arr[low])^(arr[mid]<arr[high]))
+        pos = mid;
+    else
+        pos = mid;
+    
+    int pivot = arr[pos];
+    swap(arr[pos],arr[high]);
+  
+    // Index of smaller element and indicates 
+    // the right position of pivot found so far
+    int i = low - 1;
 
-        while( left != right ) {
-            if( cmp( *left, *pivot ) ) {
-                ++left;
-            } else {
-                while( (left != right) && cmp( *pivot, *right ) )
-                    --right;
-                std::iter_swap( left, right );
-            }
+    // Traverse arr[low..high] and move all smaller
+    // elements on left side. Elements from low to 
+    // i are smaller after every iteration
+    for (int j = low; j < high; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            swap(arr[i], arr[j]);
         }
-
-        --left;
-        std::iter_swap( pivot, left );
-
-        quick_sort( first, left, cmp );
-        quick_sort( right, last, cmp );
     }
+    
+    // Move pivot after smaller elements and
+    // return its position
+    swap(arr[i + 1], arr[high]);  
+    return i + 1;
 }
 
-template< typename BidirectionalIterator >
-    inline void quick_sort( BidirectionalIterator first, BidirectionalIterator last ) {
-        quick_sort( first, last,
-                std::less_equal< typename std::iterator_traits< BidirectionalIterator >::value_type >()
-                );
+// The QuickSort function implementation
+void quickSort(vector<int>& arr, int low, int high) {
+  
+    if (low < high) {
+      
+        // pi is the partition return index of pivot
+        int pi = partition(arr, low, high);
+
+        // Recursion calls for smaller elements
+        // and greater or equals elements
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
     }
+}
