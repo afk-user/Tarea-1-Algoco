@@ -1,11 +1,11 @@
-    // O(nlogn), extraido de geeksforgeeks.org
+// O(nlogn), basado en algoritmo de geeksforgeeks.org
 #include <bits/stdc++.h>
 using namespace std;
 
-// Function to partition the array and return the pivot index
+// Funcion para particionar el arreglo y retornar el indice del pivote
 int partition(vector<int>& arr, int low, int high) {
   
-    // Choose the pivot
+    // Elegir el pivote por medio de la mediana de 3
     int pos;
     int mid = (low+high)/2;
     if ((arr[low]>arr[mid])^(arr[low]>arr[high]))
@@ -15,16 +15,15 @@ int partition(vector<int>& arr, int low, int high) {
     else
         pos = mid;
     
+    // se asigna el valor del pivote y moverlo al final
     int pivot = arr[pos];
     swap(arr[pos],arr[high]);
   
-    // Index of smaller element and indicates 
-    // the right position of pivot found so far
+    // Indice del valor más pequeño y 
+    //la posicion correcta del pivote encontrado
     int i = low - 1;
 
-    // Traverse arr[low..high] and move all smaller
-    // elements on left side. Elements from low to 
-    // i are smaller after every iteration
+    // Moverse en arr[low..high] y mover todos los elementos menores a la izquierda
     for (int j = low; j < high; j++) {
         if (arr[j] < pivot) {
             i++;
@@ -32,22 +31,21 @@ int partition(vector<int>& arr, int low, int high) {
         }
     }
     
-    // Move pivot after smaller elements and
-    // return its position
+    // Mover el pivote al lado del valor más alto menor al pivote y luego retornarlo
     swap(arr[i + 1], arr[high]);  
     return i + 1;
 }
 
-// The QuickSort function implementation
+// La implementación de Quicksort
 void quickSort(vector<int>& arr, int low, int high) {
   
     if (low < high) {
       
-        // pi is the partition return index of pivot
+        // Pivote
         int pi = partition(arr, low, high);
 
-        // Recursion calls for smaller elements
-        // and greater or equals elements
+        // Recursion para la mitad menor al pivote
+        // y la mitad mayor o igual al pivote
         quickSort(arr, low, pi - 1);
         quickSort(arr, pi + 1, high);
     }

@@ -20,8 +20,8 @@ def write_matrices_to_file(file_name, matrixA, matrixB):
             file.write(' '.join(map(str, row)) + '\n')
 
 # Example usage
-rowsA, colsA = 1000, 1000
-rowsB, colsB = 1000, 1000
+rowsA, colsA = 500, 300
+rowsB, colsB = 300, 1000
 
 matrixA = generate_matrix(rowsA, colsA)
 matrixB = generate_matrix(rowsB, colsB)

@@ -3,6 +3,7 @@
 
 using namespace std;
 
+// funcion transponedora
 void transpose(vector<vector<int>> matrix, vector<vector<int>> &transposed) {
     int row = matrix.size(), col = matrix[0].size();
     for (int i=0;i<col;i++) {
@@ -19,6 +20,7 @@ void MMoptimized(vector<vector<int>> mA,vector<vector<int>> mB,vector<vector<int
     for (int row = 0; row < m; row++) {
         for (int col = 0; col < n; col++) {
             for (int row2 = 0; row2 < p; row2++) {
+                // se multiplican dos filas distintas
                 mC[row][row2] += mA[row][col] * tB[row2][col];
             }
         }

@@ -1,11 +1,10 @@
 // O(nlogn), extraido de wikibooks.org
 #include <iterator>
-#include <algorithm> // for std::inplace_merge
-#include <functional> // for std::less
+#include <algorithm> // para std::inplace_merge
+#include <functional> // para std::less
 
 template <typename BidirectionalIterator, typename Compare = std::less<>>
-void merge_sort(BidirectionalIterator first, BidirectionalIterator last, Compare cmp = Compare {})
-{
+void merge_sort(BidirectionalIterator first, BidirectionalIterator last, Compare cmp = Compare {}) {
     const auto n = std::distance(first, last);
     
     if (n > 1) {

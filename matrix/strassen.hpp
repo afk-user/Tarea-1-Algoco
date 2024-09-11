@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// add two matrices
+// suma de dos matrices
 void add(vector< vector<int> > &matrixA, 
          vector< vector<int> > &matrixB, 
          vector< vector<int> > &matrixC, unsigned int mSize) {
@@ -16,7 +16,7 @@ void add(vector< vector<int> > &matrixA,
     }
 }
 
-// subtract two matrices
+// resta de dos matrices
 void sub(vector< vector<int> > &matrixA, 
         vector< vector<int> > &matrixB, 
         vector< vector<int> > &matrixC, unsigned int mSize) {
@@ -27,13 +27,13 @@ void sub(vector< vector<int> > &matrixA,
     }   
 }
 
-// recursive strassen matrix multiplier
+// La funcion recursiva
 void strassenR(vector< vector<int> > &matrixA,
             vector< vector<int> > &matrixB,
             vector< vector<int> > &matrixC,
             unsigned int mSize) {
     
-    // recursive base case
+    // caso base
     if (mSize == 1) {
         matrixC[0][0] = matrixA[0][0] * matrixB[0][0];
         return;
@@ -42,7 +42,7 @@ void strassenR(vector< vector<int> > &matrixA,
         int newMSize = mSize / 2;
         vector<int> innerVector(newMSize, 0);
 
-        // initialize matrices
+        // inicializar matrices
         vector< vector<int> > matrixA11(newMSize, innerVector),
                             matrixA12(newMSize, innerVector),
                             matrixA21(newMSize, innerVector),
@@ -75,7 +75,7 @@ void strassenR(vector< vector<int> > &matrixA,
                             tempMatrixA(newMSize, innerVector),
                             tempMatrixB(newMSize, innerVector);
         
-        // divide matrices into 4 submatrices
+        // dividir matriz en 4 submatrices
         for (int i = 0; i < newMSize; i++) {
             for (int j = 0; j < newMSize; j++) {
                 matrixA11[i][j] = matrixA[i][j];
@@ -157,7 +157,7 @@ void strassenR(vector< vector<int> > &matrixA,
         sub(tempMatrixA, p3, tempMatrixB, newMSize); // (p5 + p1) - p3
         sub(tempMatrixB, p7, matrixC22, newMSize); // (p5 + p1 - p3) - p7
 
-        // group into matrixC
+        // agrupar todo en matrixC
         for (int i = 0; i < newMSize ; i++) {
             for (int j = 0 ; j < newMSize ; j++) {
                 matrixC[i][j] = matrixC11[i][j];
@@ -169,7 +169,7 @@ void strassenR(vector< vector<int> > &matrixA,
     }
 }
 
-// call recursive function
+// Funcion que llama la recursividad
 void strassen(vector< vector<int> > &matrixA, 
               vector< vector<int> > &matrixB, 
               vector< vector<int> > &matrixC) {
